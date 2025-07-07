@@ -83,7 +83,7 @@ const fileSchema = new mongoose.Schema({
   contactDetails: String,
 });
 
-// const File = mongoose.model('File', fileSchema);
+const File = mongoose.model('File', fileSchema);
 
 app.post('/upload', upload.single("filename"), async (req, res) => {
   try {
@@ -109,6 +109,8 @@ app.post('/upload', upload.single("filename"), async (req, res) => {
       carPrice: req.body.carPrice,
       contactDetails: req.body.contactDetails,
     };
+
+    console.log(fileDoc)
 
     await File.create(fileDoc);
     res.status(201).json({ downloadURL: downloadURL });
@@ -166,25 +168,32 @@ const { phone, pass,name } = req.body;
 
 app.post('/sendemail', (req, res) => {
 const {name,phone,email,message } = req.body;
+console.log(name,email,message)
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'sharan.gisterpages@gmail.com',
-    pass: 'vmewcuxtoyexrjsj'
+    pass: 'iqhl fiqm lxul qcid'
   }
 });
 
 var mailOptions = {
-  from: 'sharan.gisterpages@gmail.com',
-  to: 'sharanmack06@gmail.com',
+  from: '"Sharan Contact Form" <sharan.gisterpages@gmail.com>',
+  to: email, 
   subject: 'Contact Form',
-  text: `Name: ${name}\nEmail: ${email}\nphone : ${phone}\nMessage : ${message}`
+  text: `Hey ${name}, 
+        Thanks for reaching us we will send updates on ${email} and will reach you on : ${phone} 
+        regarding your concern on below request
+        Message: ${message}`
 };
 
 transporter.sendMail(mailOptions, function(error, info){
   if (error) {
+    console.log("not sent")
     res.json({emailsent: false });
+    
   } else {
+    console.log("sent")
     res.json({ emailsent: true });
   }
 });
