@@ -40,10 +40,10 @@ const fs = require('fs/promises');
 const PORT = process.env.PORT || 3000;
 var nodemailer = require('nodemailer');
  
-const cors = require("cors");
+
 const { env } = require('process');
 
-app.use(cors({origin:"*",}));
+// app.use(cors({origin:"*",}));
 
 app.use('/uploads', express.static('uploads'));
 mongoose.set('strictQuery',false)
@@ -248,6 +248,18 @@ app.get('/myapp', async (req, res) => {
   app.listen(PORT, () => {
       console.log("listening for requests sharan");
   })
+
+const cors = require("cors");
+
+const corsOptions = {
+  origin: ['http://localhost:4200', 'https://shadowcarsfe.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // preflight support
 
 
 
