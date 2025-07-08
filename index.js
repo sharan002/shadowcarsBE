@@ -8,6 +8,19 @@ const {User} = require("./Schema");
 const { initializeApp } = require("firebase/app");
 const { getStorage, ref, getDownloadURL, uploadBytesResumable,deleteObject } = require("firebase/storage");
 
+const cors = require("cors");
+
+const corsOptions = {
+  origin: ['http://localhost:4200', 'https://shadowcarsfe.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyC3R8TZeYRZfSkeF3Bb8Fl0vM8KQRYYyac",
@@ -249,17 +262,7 @@ app.get('/myapp', async (req, res) => {
       console.log("listening for requests sharan");
   })
 
-const cors = require("cors");
 
-const corsOptions = {
-  origin: ['http://localhost:4200', 'https://shadowcarsfe.vercel.app'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // preflight support
 
 
 
