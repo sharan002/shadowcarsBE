@@ -224,7 +224,7 @@ app.delete('/deletecar', async (req, res) => {
       return res.status(200).json({ result: true, message: "Image and document deleted successfully" });
     } else {
       return res.status(404).json({ error: 'Document not found' });
-    }
+    } 
   } catch (error) {
     console.error(`Error deleting document: ${error.message}`);
     return res.status(500).json({ error: 'Internal server error' });
