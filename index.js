@@ -47,22 +47,13 @@ app.use(cors({origin:"*",}));
 
 app.use('/uploads', express.static('uploads'));
 mongoose.set('strictQuery',false)
-// const connectDB = async () => {
-//   try {
-//     const conn = await mongoose.connect(process.env.MONGO_URI);
-//     console.log(`MongoDB Connected: ${conn.connection.host}`);
-//   } catch (error) {
-//     console.log(error);
-//     process.exit(1);
-//   }
-// }
+
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 .then(() => console.log('✅ Connected to MongoDB',))
-.then(console.log('Mongo URI:', process.env.MONGO_URI))
 .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 
