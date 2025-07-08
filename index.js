@@ -11,7 +11,7 @@ const { getStorage, ref, getDownloadURL, uploadBytesResumable,deleteObject } = r
 const cors = require("cors");
 
 const corsOptions = {
-  origin: ['http://localhost:4200', 'https://shadowcarsfe.vercel.app','https://sharan002.github.io/shadowcars/'],
+  origin: ['http://localhost:4200', 'https://shadowcarsfe.vercel.app','https://sharan002.github.io'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
